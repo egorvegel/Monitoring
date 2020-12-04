@@ -56,7 +56,7 @@ $(function(){
         request.open("POST", "php/handler.php");
         //request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         //Чтобы браузер передал вместе с запросом куки и HTTP-авторизацию
-        xhr.withCredentials = true;
+        request.withCredentials = true;
 
         // btoa -> Предназаначен для кодирования строки
         request.setRequestHeader("Authorization", 'Basic ' + btoa('Ctmri:ZxCv'));
