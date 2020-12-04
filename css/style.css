@@ -1,0 +1,239 @@
+body {
+  margin: 0;
+  padding: 5vh 0;
+  font-family: "Arial";
+}
+
+h1, h2, h3, h4, h5 {
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.tooltip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+  width: 110px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  background-color: #6c7684;
+  border-radius: 5px;
+  opacity: 0;
+  color: #ffffff;
+  z-index: 10;
+  transiton: opacity linear 0.3s;
+}
+.tooltip::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-width: 10px 7.5px 0 7.5px;
+  border-color: #6c7684 transparent transparent transparent;
+  border-style: solid;
+  transform: translateX(-50%);
+}
+
+.b-calendar__tb {
+  border-spacing: 5px 5px;
+}
+
+.b-calendar__head .b-calendar__number {
+  font-weight: normal;
+}
+
+.b-calendar__day {
+  border-radius: 50%;
+}
+
+.b-calendar__number {
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+}
+
+.active {
+  background-color: #f7d9e1;
+}
+
+.nonactive {
+  background-color: #e6ebef;
+  cursor: pointer;
+}
+
+.weeknd {
+  background-color: #4fbec4;
+}
+
+.monitoring {
+  max-width: 900px;
+}
+.monitoring__title {
+  margin-bottom: 50px;
+  font-size: 20px;
+  font-weight: normal;
+}
+.monitoring__sel {
+  display: flex;
+  align-items: center;
+}
+.monitoring__sel .item {
+  margin-right: 20px;
+}
+.monitoring__sel .item__title {
+  margin-bottom: 15px;
+  font-size: 14px;
+  font-weight: normal;
+}
+.monitoring__sel .item__select {
+  position: relative;
+}
+.monitoring__sel .item__select select {
+  min-width: 250px;
+  padding: 15px;
+  padding-right: 30px;
+  background-color: #eceff4;
+  color: #8593a8;
+  border: 1px solid #c8d2df;
+  border-radius: 5px;
+  font-family: 'Roboto', sans-serif;
+  -webkit-appearance: none;
+  /* Chrome */
+  -moz-appearance: none;
+  /* Firefox */
+  appearance: none;
+}
+.monitoring__sel .item__select::before, .monitoring__sel .item__select::after {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 2px;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  background-color: #8292a6;
+  transition: transform ease-out 0.3s;
+}
+.monitoring__sel .item__select::before {
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+.monitoring__sel .item__select::after {
+  right: 9.5px;
+  top: 50%;
+  transform: translateY(-50%) rotate(130deg);
+}
+.monitoring__sel .item__select.clicked::before {
+  transform: translateY(-50%) rotate(-55deg);
+}
+.monitoring__sel .item__select.clicked::after {
+  transform: translateY(-50%) rotate(-130deg);
+}
+.monitoring__today__title {
+  margin: 10px 0;
+  font-size: 20px;
+  font-weight: normal;
+}
+.monitoring__today__blocks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.monitoring__today__blocks .block {
+  width: 25%;
+  margin-right: 10px;
+  padding: 25px 25px 15px;
+  background-color: #e0ecf6;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.monitoring__today__blocks .block__wrong {
+  background-color: #f7d9e1;
+}
+.monitoring__today__blocks .block__num {
+  font-size: 48px;
+  color: #0081d6;
+}
+.monitoring__today__blocks .block__txt {
+  font-size: 14px;
+}
+.monitoring__cal {
+  margin-top: 50px;
+}
+.monitoring__cal__title {
+  font-size: 20px;
+  font-weight: normal;
+}
+.monitoring__cal__items {
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.monitoring__cal__items .item {
+  margin-right: 40px;
+}
+.monitoring__cal__items .item:last-child {
+  margin-right: 0;
+}
+.monitoring__cal__items .item__month {
+  text-align: center;
+  font-size: 14px;
+  font-weight: normal;
+}
+.monitoring__cal__items .item__content .row__day, .monitoring__cal__items .item__content .row__num {
+  display: inline-block;
+  width: 33px;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+  font-weight: normal;
+}
+.monitoring__cal__items .item__content .row__num {
+  margin-bottom: 5px;
+  border-radius: 50%;
+}
+.monitoring__lightning {
+  display: flex;
+  margin-top: 30px;
+}
+.monitoring__lightning__item {
+  margin-right: 50px;
+  padding-left: 20px;
+  position: relative;
+  color: #000;
+}
+.monitoring__lightning__item::before {
+  content: '';
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #4fbec4;
+  position: absolute;
+  left: 0;
+  top: 2px;
+}
+.monitoring__lightning__active::before {
+  background-color: #f7d9e1;
+}
+.monitoring__lightning__nonactive::before {
+  background-color: #e6ebef;
+}
+
+/*# sourceMappingURL=style.css.map */
