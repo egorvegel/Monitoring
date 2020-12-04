@@ -26,7 +26,7 @@ $(function(){
         let end = new Date(year, month+3, 1);
 
         let request = {
-            "DateStart": start.getFullYear() + "-" + start.getMonth() + "-"+ "1T00:00:00",
+            "DateStart": start.getFullYear() + "-" + start.getMonth() + "-"+ "01T00:00:00",
             "DateEnd": end.getFullYear() + "-" + end.getMonth() + "-" + manyDays + "T00:00:00",
             "Equipment": numEq,
         }
@@ -47,13 +47,20 @@ $(function(){
             if(request.readyState == 4){
                 // Даннаые приходят с серверс
                 let response = JSON.parse(request.responseText);
+                console.log(response);
                 // Окрашиваем ячейки
                 responseHandler(response);
             }
         }
 
         request.open("POST", "php/handler.php");
-        request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        //request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        //Чтобы браузер передал вместе с запросом куки и HTTP-авторизацию
+        xhr.withCredentials = true;
+
+        // btoa -> Предназаначен для кодирования строки
+        request.setRequestHeader("Authorization", 'Basic ' + btoa('Ctmri:ZxCv'));
+        
         request.send(data);
     }
 
@@ -65,6 +72,7 @@ $(function(){
             let all = response[i].Total;
             let recorded = response[i].Recorded;
             let came = response[i].Came;
+            let didNotCome = response[i].didNotCome;
             
             if(all == recorded + came){
                 $(cells[i]).addClass("active");
@@ -80,7 +88,11 @@ $(function(){
                 $("#total").html(all);
                 $("#recorded").html(recorded);
                 $("#came").html(came);
-                $("#didNotCome").html(response[i].didNotCome);
+
+                $("#didNotCome").html("0");
+                if(didNotCome != ""){
+                    $("#didNotCome").html(didNotCome);
+                }
             }
         }
         toolTip(response);  
@@ -139,39 +151,3 @@ $(function(){
        
     }
 })
-
-
-
-/*
-    $("select[name='hospital']").on("change", function(){
-        let hosp = "hosp=" + this.value;
-        let type = "type=" + $("select[name='type']").val();
-
-        let data = hosp + "&&" + type;
-        ajax(data);
-    })
-
-    $("select[name='type']").on("change", function(){
-        let hosp = "hosp=" + $("select[name='hospital']").val();
-        let type = "type=" + this.value;
-
-        let data = hosp + "&&" + type;
-        console.log(data);
-        ajax(data);
-    })
-    */
-
-    /*
-                let info = {
-                    "Date": "2020-11-11T00:00:00",
-                    "Total": 16,
-                    "Recorded": 1,
-                    "Came": 1,
-                    "didNotCome": 2,
-                };
-                        
-
-                $("#total").html(info["Total"]);
-                $("#recorded").html(info["Recorded"]);
-                $("#Came").html(info["Came"]);
-                $("#didNotCome").html(info["didNotCome"]);*/
