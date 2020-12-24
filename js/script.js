@@ -1,4 +1,5 @@
 $(function(){
+
     let data = getData();
     ajax(data);
     let arrTooltip = document.getElementsByClassName("nonactive");
@@ -45,30 +46,30 @@ $(function(){
         
         request.onreadystatechange = function(){     
             if(request.readyState == 4){
-                // Даннаые приходят с серверс
+                // Даннаые приходят с серверс   
                 let response = JSON.parse(request.responseText);
                 console.log(response);
                 // Окрашиваем ячейки
-                responseHandler(response);
+                responseHandler(response);  
             }
+
         }
 
         request.open("POST", "php/handler.php");
-        //request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        //Чтобы браузер передал вместе с запросом куки и HTTP-авторизацию
+
+        request.send(data);
+        /*request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        Чтобы браузер передал вместе с запросом куки и HTTP-авторизацию
         request.withCredentials = true;
 
-        // btoa -> Предназаначен для кодирования строки
-        request.setRequestHeader("Authorization", 'Basic ' + btoa('Ctmri:ZxCv'));
-        
-        request.send(data);
+        btoa -> Предназаначен для кодирования строки
+        request.setRequestHeader("Authorization", 'Basic ' + btoa('Ctmri:ZxCv'));*/
     }
 
     function responseHandler(response){
         let cells = $(".b-calendar__day");
         
         for(let i = 0; i < response.length; i++){
-
             let all = response[i].Total;
             let recorded = response[i].Recorded;
             let came = response[i].Came;

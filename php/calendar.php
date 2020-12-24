@@ -1,13 +1,4 @@
 <?php
-    // SQL
-    /*
-    $result = mysqli_query($link, "SELECT * FROM `hospitals`");
-    $items = [];
-    while($i = mysqli_fetch_assoc($result)){
-        array_push($items, $i);
-    }*/
-
-
     //Date
     $monthsNames = [
         'January' => "Январь",
