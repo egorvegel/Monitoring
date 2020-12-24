@@ -4,10 +4,10 @@
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/xml', $additionalHeaders));
     curl_setopt($ch, CURLOPT_HEADER, 1);
-    curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
+    //curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
     curl_setopt($ch, CURLOPT_TIMEOUT, 30);
     curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $payloadName);
+    //curl_setopt($ch, CURLOPT_POSTFIELDS, $payloadName);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
     
     $arr = [
@@ -222,8 +222,9 @@
             "didNotCome" => ""
         ],
     ];
-      
+
     curl_close($ch);
+
     echo json_encode($arr);
 
 ?>
