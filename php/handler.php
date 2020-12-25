@@ -1,6 +1,7 @@
 <?php   
 
     $additionalHeaders =  'Authorization: Basic ' . base64_encode("Ctmri:ZxCv");
+    // Адрес сервака
     $ch = curl_init();
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -9,6 +10,7 @@
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
+    // Настройки curl
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/xml', $additionalHeaders));
     curl_setopt($ch, CURLOPT_TIMEOUT, 30);
     curl_setopt($ch, CURLOPT_POST, 1);
