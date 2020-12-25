@@ -46,10 +46,8 @@ $(function(){
         
         request.onreadystatechange = function(){     
             if(request.readyState == 4){
-                // Даннаые приходят с серверс   
-                console.log(request);
+                // Данные приходят с серверс   
                 let response = JSON.parse(request.responseText);
-                console.log(request);
                 // Окрашиваем ячейки
                 responseHandler(response);  
             }

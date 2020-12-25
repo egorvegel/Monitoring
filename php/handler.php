@@ -2,15 +2,22 @@
 
     $additionalHeaders =  'Authorization: Basic ' . base64_encode("Ctmri:ZxCv");
     $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Если https
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/xml', $additionalHeaders));
-    curl_setopt($ch, CURLOPT_HEADER, 1);
-    //curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
     curl_setopt($ch, CURLOPT_TIMEOUT, 30);
     curl_setopt($ch, CURLOPT_POST, 1);
-    //curl_setopt($ch, CURLOPT_POSTFIELDS, $payloadName);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+
+
+    $result = curl_exec($ch);
     
-    $arr = [
+    // Когда будет реальный сервер - эти данные удалю
+    $result = [
         [
             "Date" => "2020-12-01T00:00:00",
             "Total" => 0,
@@ -225,6 +232,5 @@
 
     curl_close($ch);
 
-    echo json_encode($arr);
-
+    echo json_encode($result);
 ?>
