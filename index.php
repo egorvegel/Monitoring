@@ -1,5 +1,27 @@
 <?php
     include "php/calendar.php";
+
+    $ch = curl_init('https://ob-sko.e-health.kz/sko_ob/hs/CTMRI/unit');
+    curl_setopt($ch, CURLOPT_POST, 1 );
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+    
+    $additionalHeaders =  'Authorization: Basic ' . base64_encode('Ctmri:l4i5JF#VT$YUPq3W');
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/xml', $additionalHeaders));
+    $result = json_decode(curl_exec($ch), true);
+
+
+    // Если ошибка
+    if (curl_errno($ch)) {
+        $info = curl_getinfo($ch);
+        echo 'Прошло ', $info['total_time'], ' секунд во время запроса к ', $info['url'], "\n";
+        echo '<pre>';
+        var_dump($info);
+        echo '</pre>';
+    } 
+    curl_close($ch);
 ?>
 
 <!DOCTYPE html>
@@ -33,9 +55,9 @@
                     <h3 class="item__title">Выберите аппарат:</h3>
                     <div class="item__select">
                         <select name="type" id="">
-                            <option value="1">КT кабинет (Онко)</option>
-                            <option value="2">КT кабинет (Обл)</option>
-                            <option value="3">МРТ</option>
+                            <?php foreach($result as $item): ?>
+                                <option value="<?= $item['Code']?>" ><?= $item['Name']?></option>;
+                            <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
@@ -98,7 +120,7 @@
             </div>
         </div>
     </div>
-    <div class="tooltip">3 свободно</div>
+    <div class="tooltip">данных нету</div>
     <script src="js/jquery-3.5.1.js"></script>
     <script src="js/script.js"></script>
 </body>

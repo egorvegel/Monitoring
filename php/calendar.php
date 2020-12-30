@@ -1,5 +1,4 @@
 <?php
-    //Date
     $monthsNames = [
         'January' => "Январь",
         'February' => "Февраль",
@@ -7,7 +6,7 @@
         'April' => "Апрель",
         'May' => "Май",
         'June' => "Июнь",
-        'Jule' => "Июль",
+        'July' => "Июль",
         'August' => "Август",
         'September' => "Сентябрь",
         'October' => "Октябрь",
@@ -20,6 +19,17 @@
     $nextMonth  = date('F', mktime(0, 0, 0, date("m")+1,   date("d"),   date("Y")));
     $nextnextMonth =  date('F', mktime(0, 0, 0, date("m")+2,   date("d"),   date("Y")));
 
+    
+    // Проблемы с февралем
+    if($nextMonth == "January"){
+        $nextnextMonth = "February";
+    }
+    if($month == "January"){
+        $nextMonth = "February";
+    }
+    if($nextMonth == "March"){
+        $month = "February";
+    }
 
     function draw_calendar($month, $year, $action = 'none') {
         $calendar = '<table class="b-calendar__tb">';
