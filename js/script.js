@@ -68,16 +68,72 @@ $(function(){
     }
 
     function responseHandler(response){
-        let cells = $(".b-calendar__day");
-        let d = 0;
+        let now = new Date(); 
+        let nullBeforeMonth = nullDate(now.getMonth())      
+        let nullBeforeDay = nullDate(now.getDate())          
+        let str = now.getFullYear() + "-" + nullBeforeMonth + (now.getMonth()+1) + "-" + nullBeforeDay + now.getDate();
 
+
+        for (let i = 0, d = 0; i < response.length; i++) {
+            /*
+            console.log(cells[i].dataset.date);
+            console.log(response[d].Date.slice(0, -9));
+*/
+            
+            if(cells[i].dataset.date === response[d].Date.slice(0, -9)){
+                if(Number(response[d].Total) <= Number(response[d].Recorded) + Number(response[d].Came)){
+                    cells[i].classList.add("active");
+                }else{
+                    cells[i].classList.add("nonactive");
+                }
+                
+                if(str === response[d].Date.slice(0, -9)){
+                    $(cells[i]).removeClass("active nonactive weeknd");
+
+                    $("#total").html(response[d].Total);
+                    $("#recorded").html(response[d].Recorded);
+                    response[d].Came === "" ? $("#came").html(0) : $("#came").html(response[d].Came);
+                    response[d].didNotCome === "" ? $("#didNotCome").html(0) : $("#didNotCome").html(response[d].didNotCome);
+                }
+
+                d++;
+            }else{
+                d = d;
+            }
+
+            
+            
+        }
         animToolTip(response);
+        
 
+/*
+        let now = new Date(); 
+        let nullBeforeMonth = nullDate(now.getMonth())      
+        let nullBeforeDay = nullDate(now.getDate())          
+        let str = now.getFullYear() + "-" + nullBeforeMonth + (now.getMonth()+1) + "-" + nullBeforeDay + now.getDate();
+        
+        if(response[d].Date.slice(0, -9) === str){
+            cells[i].classList.remove("active");
+            cells[i].classList.remove("nonactive");
+
+            console.log(d);
+            console.log(i);
+
+            $("#total").html(all);
+
+            recorded === "" ? $("#recorded").html(0) : $("#recorded").html(recorded);
+            came === "" ? $("#came").html(0) : $("#came").html(came);
+            didNotCome === "" ? $("#didNotCome").html(0) : $("#didNotCome").html(didNotCome);
+        }
+        console.log(str);*/
+
+        /*        
         for(let i = 0; i < response.length; i++){
-            let all = response[i].Total;
-            let recorded = response[i].Recorded;
-            let came = response[i].Came;
-            let didNotCome = response[i].didNotCome;
+            let all = response[d].Total;
+            let recorded = response[d].Recorded;
+            let came = response[d].Came;
+            let didNotCome = response[d].didNotCome;
 
 
             let day = response[d].Date.slice(8, -9);
@@ -94,12 +150,11 @@ $(function(){
                 }else{
                     $(cells[i]).addClass("nonactive");
                 }
-                                
-                today();     
             } 
-
+*/
+            /*
             function today(){
-                let now = new Date();             
+                let now = new Date(); 
                 if(now.getDate() == cells[i].textContent){
                     cells[i].classList.remove("active");
                     cells[i].classList.remove("nonactive");
@@ -110,22 +165,23 @@ $(function(){
 
                     came === 0 ? $("#came").html(0) : $("#came").html(came);
                     didNotCome === 0 ? $("#didNotCome").html(0) : $("#didNotCome").html(didNotCome);
-                    today++;
                 }    
             }
-        }
+            
+        }*/
     }
 
     function animToolTip(response){
-        $(".b-calendar__day").on("mousemove", function(e){
+        $(".nonactive").on("mousemove", function(e){
             for(let d = 0; d < response.length; d++){
                 let str = response[d].Date.slice(0, -9);
-                
+
+
                 if(str === this.dataset.date){
                     if(response[d].Recorded === "") response[d].Recorded = 0;
                     if(response[d].Came === "") response[d].Came = 0;
 
-                    if(response[d].Total <= response[d].Recorded + response[d].Came){
+                    if(Number(response[d].Total) <= Number(response[d].Recorded) + Number(response[d].Came)){
                         $(".tooltip").html("Мест нету");
                     }else{
                         let dif = response[d].Total - response[d].Recorded;
@@ -143,7 +199,7 @@ $(function(){
             
         })
     
-        $(".b-calendar__day").on("mouseout", function(e){
+        $(".nonactive").on("mouseout", function(e){
             $(".tooltip").css({
                 top: this.getBoundingClientRect().top + pageYOffset - 42,
                 left: this.getBoundingClientRect().left + pageXOffset - 38,

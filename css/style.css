@@ -75,7 +75,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .weeknd {
-  background-color: #4fbec4;
+  background-color: #9ddcdf;
 }
 
 .none {
@@ -192,7 +192,8 @@ h1, h2, h3, h4, h5 {
   flex-wrap: wrap;
 }
 .monitoring__cal__items .item {
-  margin-right: 40px;
+  margin-right: 20px;
+  margin-bottom: 20px;
 }
 .monitoring__cal__items .item:last-child {
   margin-right: 0;

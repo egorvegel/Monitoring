@@ -1,4 +1,6 @@
 <?php   
+
+    // Данные с Ajax запроса
     $data = file_get_contents('php://input');
 
     $ch = curl_init('https://ob-sko.e-health.kz/sko_ob/hs/CTMRI/info');
@@ -12,10 +14,6 @@
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/xml', $auth));
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 
-    // Данные с Ajax запроса
     $result = curl_exec($ch);
-    echo $result;
-
-    curl_close($ch);
-    echo json_encode($result);
+    echo $result;   
 ?>
