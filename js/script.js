@@ -58,7 +58,6 @@ $(function(){
                 let response = JSON.parse(request.responseText);
                 // Окрашиваем ячейки
                 responseHandler(response);  
-                console.log(response);
             }
         }
 
