@@ -60,7 +60,6 @@ $(function(){
                 responseHandler(response);  
                 console.log(response);
             }
-
         }
 
         request.open("POST", "php/handler.php");
@@ -75,12 +74,6 @@ $(function(){
 
 
         for (let i = 0, d = 0; i < response.length; i++) {
-            
-            
-
-            
-
-
             // Красим ячейки
             if(cells[i].dataset.date === response[d].Date.slice(0, -9)){
                 if(Number(response[d].Total) <= Number(response[d].Recorded) + Number(response[d].Came)){
@@ -92,7 +85,8 @@ $(function(){
                 // До сегонешного числа все ячейки красного цвета (свободных мест нет)
                 if(cells[i].dataset.date <= str){
                     cells[i].classList.add("active");
-                    console.log(cells[i].dataset.date, str);
+                    // Т.к. день уже прошел, ставлю невыполнимое условие, чтобы содержимое tooltip == Мест нету
+                    response[d].Recorded = 100;
                 }
 
                 // Сегодняшнее число
@@ -105,7 +99,6 @@ $(function(){
                 // До сегонешного числа все ячейки красного цвета (свободных мест нет)
                 if(cells[i].dataset.date <= str){
                     cells[i].classList.add("active");
-                    console.log(cells[i].dataset.date, str);
                 }
             } 
 
