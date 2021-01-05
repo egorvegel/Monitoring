@@ -83,10 +83,10 @@ $(function(){
                 }
 
                 // До сегонешного числа все ячейки красного цвета (свободных мест нет)
-                if(cells[i].dataset.date <= str){
+                if(cells[i].dataset.date < str){
                     cells[i].classList.add("active");
                     // Т.к. день уже прошел, ставлю невыполнимое условие, чтобы содержимое tooltip == Мест нету
-                    response[d].Recorded = 100;
+                    response[d].Recorded = 19;
                 }
 
                 // Сегодняшнее число
@@ -97,8 +97,9 @@ $(function(){
                 d = d;
 
                 // До сегонешного числа все ячейки красного цвета (свободных мест нет)
-                if(cells[i].dataset.date <= str){
+                if(cells[i].dataset.date < str){
                     cells[i].classList.add("active");
+                    response[d].Recorded = 19;
                 }
             } 
 
