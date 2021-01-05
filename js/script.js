@@ -189,28 +189,6 @@ $(function(){
             allDays += DaysInMonth;
         }      
     }
-
-
-    // Анимация у select
-    
-    $("body").on("click", function(e){
-        let target = e.target;
-        if(target.tagName == "SELECT"){
-            $($(target).parent(".item__select")[0]).addClass("clicked");
-        }else{
-            $(".item__select").removeClass("clicked");
-        }
-    })
-
-/*
-    $("select[name='hospital']").on("click", function(){
-        $($(this).parent(".item__select")[0]).toggleClass("clicked");
-        console.log("1");
-    })
-
-    $("select[name='type']").on("click", function(){
-        $($(this).parent(".item__select")[0]).toggleClass("clicked");
-    })*/
 })
 
 
