@@ -70,8 +70,9 @@ h1, h2, h3, h4, h5{
     text-align: center;
 }
 
-.active{background-color: hsl(345,64,91);}
+
 .nonactive{background-color: hsl(206,24,92); cursor: pointer;}
+.active{background-color: hsl(345,64,91);}
 .weeknd{background-color: #9ddcdf;}
 .none{background-color: hsl(0, 45%, 55%);}
 //--------------------------------------------------
@@ -113,6 +114,8 @@ h1, h2, h3, h4, h5{
                     -webkit-appearance: none;/* Chrome */
                     -moz-appearance: none;/* Firefox */
                     appearance: none;
+                    border: none;
+                    outline: none;
                 }
                 &::before, &::after{
                     content: '';
@@ -252,4 +255,5 @@ h1, h2, h3, h4, h5{
         }
     }
 }
+
 

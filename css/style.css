@@ -65,13 +65,13 @@ h1, h2, h3, h4, h5 {
   text-align: center;
 }
 
-.active {
-  background-color: #f7d9e1;
-}
-
 .nonactive {
   background-color: #e6ebef;
   cursor: pointer;
+}
+
+.active {
+  background-color: #f7d9e1;
 }
 
 .weeknd {
@@ -119,6 +119,8 @@ h1, h2, h3, h4, h5 {
   -moz-appearance: none;
   /* Firefox */
   appearance: none;
+  border: none;
+  outline: none;
 }
 .monitoring__sel .item__select::before, .monitoring__sel .item__select::after {
   content: '';

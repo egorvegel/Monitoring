@@ -74,7 +74,7 @@
         
         // дошли до чисел, будем их писать в первую строку
         for($list_day = 1; $list_day <= $days_in_month; $list_day++) {
-            $calendar.= '<td class="b-calendar__day';
+            $calendar.= '<td class="b-calendar__day nonactive';
 
             // выделяем выходные дни
             if ($running_day != 0) {

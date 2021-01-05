@@ -75,19 +75,47 @@ $(function(){
 
 
         for (let i = 0, d = 0; i < response.length; i++) {
-            /*
-            console.log(cells[i].dataset.date);
-            console.log(response[d].Date.slice(0, -9));
-*/
             
+            
+
+            
+
+
+            // Красим ячейки
             if(cells[i].dataset.date === response[d].Date.slice(0, -9)){
                 if(Number(response[d].Total) <= Number(response[d].Recorded) + Number(response[d].Came)){
                     cells[i].classList.add("active");
                 }else{
-                    cells[i].classList.add("nonactive");
+                    cells[i].classList.remove("active");
                 }
-                
-                if(str === response[d].Date.slice(0, -9)){
+
+                // До сегонешного числа все ячейки красного цвета (свободных мест нет)
+                if(cells[i].dataset.date <= str){
+                    cells[i].classList.add("active");
+                    console.log(cells[i].dataset.date, str);
+                }
+
+                // Сегодняшнее число
+                today(i, d);
+                d++;
+            }else{
+                // Если нет определенного числа у сервака, то d просто пропускаем, i++
+                d = d;
+
+                // До сегонешного числа все ячейки красного цвета (свободных мест нет)
+                if(cells[i].dataset.date <= str){
+                    cells[i].classList.add("active");
+                    console.log(cells[i].dataset.date, str);
+                }
+            } 
+
+            
+        }
+
+        animToolTip(response);
+
+        function today(i, d){
+            if(str === response[d].Date.slice(0, -9)){
                     $(cells[i]).removeClass("active nonactive weeknd");
 
                     $("#total").html(response[d].Total);
@@ -95,118 +123,47 @@ $(function(){
                     response[d].Came === "" ? $("#came").html(0) : $("#came").html(response[d].Came);
                     response[d].didNotCome === "" ? $("#didNotCome").html(0) : $("#didNotCome").html(response[d].didNotCome);
                 }
-
-                d++;
-            }else{
-                d = d;
-            }
-
-            
-            
         }
-        animToolTip(response);
-        
 
-/*
-        let now = new Date(); 
-        let nullBeforeMonth = nullDate(now.getMonth())      
-        let nullBeforeDay = nullDate(now.getDate())          
-        let str = now.getFullYear() + "-" + nullBeforeMonth + (now.getMonth()+1) + "-" + nullBeforeDay + now.getDate();
-        
-        if(response[d].Date.slice(0, -9) === str){
-            cells[i].classList.remove("active");
-            cells[i].classList.remove("nonactive");
+        function animToolTip(response){
+            //$(".b-calendar__day:not(.active):not(.weeknd)").on("mousemove", function(e){
+            $(".b-calendar__day:not(.weeknd)").on("mousemove", function(e){
+                for(let d = 0; d < response.length; d++){
+                    let str = response[d].Date.slice(0, -9);
 
-            console.log(d);
-            console.log(i);
+                    if(str === this.dataset.date){
+                        if(response[d].Recorded === "") response[d].Recorded = 0;
+                        if(response[d].Came === "") response[d].Came = 0;
 
-            $("#total").html(all);
-
-            recorded === "" ? $("#recorded").html(0) : $("#recorded").html(recorded);
-            came === "" ? $("#came").html(0) : $("#came").html(came);
-            didNotCome === "" ? $("#didNotCome").html(0) : $("#didNotCome").html(didNotCome);
-        }
-        console.log(str);*/
-
-        /*        
-        for(let i = 0; i < response.length; i++){
-            let all = response[d].Total;
-            let recorded = response[d].Recorded;
-            let came = response[d].Came;
-            let didNotCome = response[d].didNotCome;
-
-
-            let day = response[d].Date.slice(8, -9);
-            if(day.split("")[0] === "0"){
-                day = day.split("")[1];
-            }
-            
-            if(cells[i].textContent !== day){
-                $(cells[i]).addClass("none");
-            }else{
-                d++;
-                if(all < recorded || all < came){
-                    $(cells[i]).addClass("active");
-                }else{
-                    $(cells[i]).addClass("nonactive");
-                }
-            } 
-*/
-            /*
-            function today(){
-                let now = new Date(); 
-                if(now.getDate() == cells[i].textContent){
-                    cells[i].classList.remove("active");
-                    cells[i].classList.remove("nonactive");
-    
-                    $("#total").html(all);
-                    $("#recorded").html(recorded);
-                    $("#came").html(came);
-
-                    came === 0 ? $("#came").html(0) : $("#came").html(came);
-                    didNotCome === 0 ? $("#didNotCome").html(0) : $("#didNotCome").html(didNotCome);
-                }    
-            }
-            
-        }*/
-    }
-
-    function animToolTip(response){
-        $(".nonactive").on("mousemove", function(e){
-            for(let d = 0; d < response.length; d++){
-                let str = response[d].Date.slice(0, -9);
-
-
-                if(str === this.dataset.date){
-                    if(response[d].Recorded === "") response[d].Recorded = 0;
-                    if(response[d].Came === "") response[d].Came = 0;
-
-                    if(Number(response[d].Total) <= Number(response[d].Recorded) + Number(response[d].Came)){
-                        $(".tooltip").html("Мест нету");
+                        if(Number(response[d].Total) <= Number(response[d].Recorded) + Number(response[d].Came)){
+                            $(".tooltip").html("Мест нету");
+                        }else{
+                            let dif = response[d].Total - response[d].Recorded;
+                            $(".tooltip").html(`${dif} свободно`);
+                        }
                     }else{
-                        let dif = response[d].Total - response[d].Recorded;
-                        $(".tooltip").html(`${dif} свободно`);
+                        d = d;
                     }
-                }else{
-                    d = d;
                 }
-            }
-            $(".tooltip").css({
-                top: this.getBoundingClientRect().top + pageYOffset - 42,
-                left: this.getBoundingClientRect().left + pageXOffset - 38,
-                opacity: 0.9,
+                $(".tooltip").css({
+                    top: this.getBoundingClientRect().top + pageYOffset - 42,
+                    left: this.getBoundingClientRect().left + pageXOffset - 38,
+                    opacity: 0.9,
+                })
+                
             })
-            
-        })
-    
-        $(".nonactive").on("mouseout", function(e){
-            $(".tooltip").css({
-                top: this.getBoundingClientRect().top + pageYOffset - 42,
-                left: this.getBoundingClientRect().left + pageXOffset - 38,
-                opacity: 0,
-            }) 
-        })
+        
+            $(".b-calendar__day:not(.active):not(.weeknd)").on("mouseout", function(e){
+                $(".tooltip").css({
+                    top: this.getBoundingClientRect().top + pageYOffset - 42,
+                    left: this.getBoundingClientRect().left + pageXOffset - 38,
+                    opacity: 0,
+                }) 
+            })
+        }
     }
+
+    
 
     function nullDate(condition){
         let str = "";
@@ -235,6 +192,7 @@ $(function(){
 
 
     // Анимация у select
+    
     $("body").on("click", function(e){
         let target = e.target;
         if(target.tagName == "SELECT"){
@@ -243,6 +201,16 @@ $(function(){
             $(".item__select").removeClass("clicked");
         }
     })
+
+/*
+    $("select[name='hospital']").on("click", function(){
+        $($(this).parent(".item__select")[0]).toggleClass("clicked");
+        console.log("1");
+    })
+
+    $("select[name='type']").on("click", function(){
+        $($(this).parent(".item__select")[0]).toggleClass("clicked");
+    })*/
 })
 
 
