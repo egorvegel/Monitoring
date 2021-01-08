@@ -111,7 +111,7 @@ $(function(){
             if(str === response[d].Date.slice(0, -9)){
                     $(cells[i]).removeClass("active nonactive weeknd");
 
-                    $("#total").html(response[d].Total);
+                    response[d].Total < response[d].Recorded ? $("#total").html(response[d].Recorded) : $("#total").html(response[d].Total);
                     $("#recorded").html(response[d].Recorded);
                     response[d].Came === "" ? $("#came").html(0) : $("#came").html(response[d].Came);
                     response[d].didNotCome === "" ? $("#didNotCome").html(0) : $("#didNotCome").html(response[d].didNotCome);
