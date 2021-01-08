@@ -120,7 +120,7 @@
             </div>
         </div>
     </div>
-    <div class="tooltip">данных нету</div>
+    <div class="tooltip">данных нет</div>
     <script src="js/jquery-3.5.1.js"></script>
     <script src="js/script.js"></script>
 </body>
