@@ -119,7 +119,6 @@ $(function(){
         }
 
         function animToolTip(response){
-            //$(".b-calendar__day:not(.active):not(.weeknd)").on("mousemove", function(e){
             $(".b-calendar__day:not(.weeknd)").on("mousemove", function(e){
                 for(let d = 0; d < response.length; d++){
                     let str = response[d].Date.slice(0, -9);
