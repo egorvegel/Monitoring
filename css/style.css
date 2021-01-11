@@ -75,7 +75,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .weeknd {
-  background-color: #8b8b8b;
+  background-color: #8a8a8a;
 }
 
 .none {
@@ -114,6 +114,7 @@ h1, h2, h3, h4, h5 {
   border: 1px solid #c8d2df;
   border-radius: 5px;
   font-family: 'Roboto', sans-serif;
+  font-size: 14px;
   -webkit-appearance: none;
   /* Chrome */
   -moz-appearance: none;
@@ -233,7 +234,7 @@ h1, h2, h3, h4, h5 {
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background-color: #8b8b8b;
+  background-color: #8a8a8a;
   position: absolute;
   left: 0;
   top: 2px;

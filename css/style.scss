@@ -73,7 +73,7 @@ h1, h2, h3, h4, h5{
 
 .nonactive{background-color: hsl(206,24,92); cursor: pointer;}
 .active{background-color: hsl(345,64,91);}
-.weeknd{background-color: #8b8b8b;}
+.weeknd{background-color: hsl(0, 0%, 54%);}
 .none{background-color: hsl(0, 45%, 55%);}
 //--------------------------------------------------
 
@@ -110,6 +110,7 @@ h1, h2, h3, h4, h5{
                     border: 1px solid hsl(215,26,83);
                     border-radius: 5px;
                     font-family: 'Roboto', sans-serif;
+                    font-size: 14px;
 
                     -webkit-appearance: none;/* Chrome */
                     -moz-appearance: none;/* Firefox */
@@ -241,7 +242,7 @@ h1, h2, h3, h4, h5{
                 width: 15px;
                 height: 15px;
                 border-radius: 50%;
-                background-color: #8b8b8b;
+                background-color: hsl(0, 0%, 54%);
                 position: absolute;
                 left: 0;
                 top: 2px;
